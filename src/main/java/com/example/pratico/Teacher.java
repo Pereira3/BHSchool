@@ -1,16 +1,19 @@
 package com.example.pratico;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table(name = "teacher")
 public class Teacher extends User {
+    @OneToMany(mappedBy = "teacher")
     private List<Course> courses;
-    private float salary;
-
-    public Teacher(String name, String email, String password, String specialization, List<Course> courses) {
-        super(name, email, password, false, 2);
-        this.courses = courses;
-    }
+    public float salary;
 
     public List<Course> getCourses() {
         return courses;

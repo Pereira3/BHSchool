@@ -1,18 +1,23 @@
 package com.example.pratico;
 
+import jakarta.persistence.*;
+
 import java.util.Objects;
 
+@Entity
+@Table(name = "course")
 public class Course {
-private static int idc = 0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    public int idc;
     private String name;
     private String description;
     private int duration; // in hours
+    private int capacity;
 
-    public Course(String name, String description, int duration) {
-        this.name = name;
-        this.description = description;
-        this.duration = duration;
-    }
+    @ManyToOne
+    @JoinColumn(name = "idu")
+    private Teacher teacher;
 
     public String getName() {
         return name;
@@ -36,6 +41,14 @@ private static int idc = 0;
 
     public void setDuration(int duration) {
         this.duration = duration;
+    }
+
+    public int getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
     }
 
     @Override

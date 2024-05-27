@@ -1,19 +1,36 @@
 package com.example.pratico;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
-    private static int idu = 0;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int idu;
     private String name;
     private String email;
     private String password;
-    private boolean isAdmin;
-    private int role; // 1 - "aluno" or 2 - "professor"
+    private int role; // 0 - "Admin" or 1 - "aluno" or 2 - "professor"
+    private String BirthDate;
+    private String address;
 
-    public User(String name, String email, String password, boolean isAdmin, int role) {
+    public User(int id, String name, String email, String password, int role, String BirthDate, String address) {
+        this.idu = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.isAdmin = isAdmin;
         this.role = role;
+        this.BirthDate = BirthDate;
+        this.address = address;
+    }
+
+    public User() {
+        // Construtor padrão
+    }
+
+    public int getIdu() {
+        return idu;
     }
 
     public String getName() {
@@ -32,10 +49,6 @@ public class User {
         return role;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -52,7 +65,31 @@ public class User {
         this.role = role;
     }
 
-    public void setAdmin(boolean isAdmin) {
-        this.isAdmin = isAdmin;
+    public String getBirthDate() {
+        return BirthDate;
+    }
+
+    public void setBirthDate(String BirthDate) {
+        this.BirthDate = BirthDate;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", BirthDate='" + BirthDate + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

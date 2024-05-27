@@ -1,30 +1,31 @@
 package com.example.pratico;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+
 import java.util.Objects;
 
+@Entity
 public class Student extends User{
-    private static int numStudent;
-    private int media;
+    private float average;
     private int matricula; //1 - em Curso || 2 - Finalizado || 3 - Desistiu
 
-    public Student(String name, String email, String password) {
-        super(name, email, password, false, 1);
+    public Student(User u, float average, int matricula) {
+        super(u.getIdu(), u.getName(), u.getEmail(), u.getPassword(), u.getRole(), u.getBirthDate(), u.getAddress());
+        this.average = average;
+        this.matricula = matricula;
     }
 
-    public static int getNumStudent() {
-        return numStudent;
+    public Student() {
+        super(); // Chama o construtor padrão da classe pai
     }
 
-    public static void setNumStudent(int numStudent) {
-        Student.numStudent = numStudent;
-    }
-
-    public int getMedia() {
-        return media;
+    public float getAverage() {
+        return average;
     }
 
     public void setMedia(int media) {
-        this.media = media;
+        this.average = media;
     }
 
     public int getMatricula() {
@@ -39,13 +40,13 @@ public class Student extends User{
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Student student)) return false;
-        return media == student.media && matricula == student.matricula;
+        return average == student.average && matricula == student.matricula;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "media=" + media +
+                "media=" + average +
                 ", matricula=" + matricula +
                 '}';
     }
