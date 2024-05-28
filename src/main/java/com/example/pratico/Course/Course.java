@@ -1,7 +1,5 @@
-package com.example.pratico;
-
+package com.example.pratico.Course;
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
 @Entity
@@ -15,14 +13,9 @@ public class Course {
     private int duration; // in hours
     private int capacity;
 
-    @ManyToOne
-    @JoinColumn(name = "idu")
-    private Teacher teacher;
-
     public String getName() {
         return name;
     }
-
     public String getDescription() {
         return description;
     }
@@ -30,7 +23,6 @@ public class Course {
     public void setName(String name) {
         this.name = name;
     }
-
     public void setDescription(String description) {
         this.description = description;
     }
@@ -38,7 +30,6 @@ public class Course {
     public int getDuration() {
         return duration;
     }
-
     public void setDuration(int duration) {
         this.duration = duration;
     }
@@ -46,7 +37,6 @@ public class Course {
     public int getCapacity() {
         return capacity;
     }
-
     public void setCapacity(int capacity) {
         this.capacity = capacity;
     }
@@ -54,16 +44,19 @@ public class Course {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Course course)) return false;
-        return duration == course.duration && Objects.equals(name, course.name) && Objects.equals(description, course.description);
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return idc == course.idc && duration == course.duration && capacity == course.capacity && Objects.equals(name, course.name) && Objects.equals(description, course.description);
     }
 
     @Override
     public String toString() {
-        return "Curso{" +
-                "name='" + name + '\'' +
+        return "Course{" +
+                "idc=" + idc +
+                ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", duration=" + duration +
+                ", capacity=" + capacity +
                 '}';
     }
 }

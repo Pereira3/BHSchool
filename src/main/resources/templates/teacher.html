@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Pagina do Professor</title>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="/css/teacher.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+</head>
+<body>
+<nav role="navigation" class="primary-navigation">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Courses &dtrif;</a>
+            <ul class="dropdown">
+                <li><a href="#">View courses</a></li>
+                <li><a href="#">Assign grades</a></li>
+                <li><a href="#">View grades</a></li>
+            </ul>
+        </li>
+        <li><a href="#">Profile</a></li>
+    </ul>
+</nav>
+<h1>Lista de Professores</h1>
+<table border="1" class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Email</th>
+            <th>Data de Nascimento</th>
+            <th>Morada</th>
+            <th>Curso</th>
+            <th>Salario</th>
+            <!-- Adicione mais colunas conforme necessário -->
+        </tr>
+    </thead>
+    <!-- Iteração sobre a lista de professores -->
+    <tbody>
+        <tr th:each="professor : ${list_teacher}">
+            <td th:text="${professor.idt}"></td>
+            <td th:text="${professor.name}"></td>
+            <td th:text="${professor.email}"></td>
+            <td th:text="${professor.birthdate}"></td>
+            <td th:text="${professor.address}"></td>
+            <td th:text="${professor.idc}"></td>
+            <td th:text="${professor.salary}"></td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

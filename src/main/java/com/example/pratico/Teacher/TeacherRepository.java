@@ -1,4 +1,4 @@
-package com.example.pratico;
+package com.example.pratico.Teacher;
 
 import org.springframework.data.repository.CrudRepository;
 
