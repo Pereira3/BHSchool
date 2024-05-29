@@ -10,17 +10,18 @@
 <nav role="navigation" class="primary-navigation">
     <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#">Courses &dtrif;</a>
+        <li><a href="#">Tables&dtrif;</a>
             <ul class="dropdown">
-                <li><a href="#">View courses</a></li>
-                <li><a href="#">Assign grades</a></li>
-                <li><a href="#">View grades</a></li>
+                <li><a href="#">Courses</a></li>
+                <li><a href="#">Students</a></li>
+                <li><a href="#">Teachers</a></li>
             </ul>
         </li>
         <li><a href="#">Profile</a></li>
     </ul>
 </nav>
 <h1>Lista de Professores</h1>
+<a th:href="@{/adicionarProfessor}"> Add Teacher </a>
 <table border="1" class="table">
     <thead>
     <tr>
@@ -31,10 +32,8 @@
         <th>Morada</th>
         <th>Curso</th>
         <th>Salario</th>
-        <!-- Adicione mais colunas conforme necessário -->
     </tr>
     </thead>
-    <!-- Iteração sobre a lista de professores -->
     <tbody>
     <tr th:each="professor : ${list_teacher}">
         <td th:text="${professor.idt}"></td>

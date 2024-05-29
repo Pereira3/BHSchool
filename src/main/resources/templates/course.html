@@ -29,10 +29,8 @@
     <th>Descricao</th>
     <th>Duracao</th>
     <th>Capacidade</th>
-    <!-- Adicione mais colunas conforme necessário -->
   </tr>
   </thead>
-  <!-- Iteração sobre a lista de professores -->
   <tbody>
   <tr th:each="curso : ${list_course}">
     <td th:text="${curso.idc}"></td>

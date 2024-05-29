@@ -63,7 +63,7 @@ public class Teacher{
         this.idc = idc;
     }
 
-    public float getSalary() {
+    public int getSalary() {
         return salary;
     }
     public void setSalary(int salary) {
