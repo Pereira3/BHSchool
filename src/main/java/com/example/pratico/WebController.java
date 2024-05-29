@@ -18,7 +18,13 @@ public class WebController {
     @Autowired
     private StudentRepository studentRepository;
 
-
+    @GetMapping("/admin")
+    public String admins(Model model) {
+        model.addAttribute("list_teacher", teacherRepository.findAll());
+        model.addAttribute("list_student", studentRepository.findAll());
+        model.addAttribute("list_course", courseRepository.findAll());
+        return "admin";
+    }
     @GetMapping("/student")
     public String alunos(Model model) {
         model.addAttribute("list_student", studentRepository.findAll());

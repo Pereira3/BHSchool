@@ -20,23 +20,26 @@
     <li><a href="#">Profile</a></li>
   </ul>
 </nav>
-<h1>Lista de Professores</h1>
+<h1>Lista de Cursos</h1>
 <table border="1" class="table">
   <thead>
   <tr>
     <th>ID</th>
     <th>Nome</th>
-    <th>Email</th>
-    <th>Salario</th>
+    <th>Descricao</th>
+    <th>Duracao</th>
+    <th>Capacidade</th>
     <!-- Adicione mais colunas conforme necessário -->
   </tr>
   </thead>
   <!-- Iteração sobre a lista de professores -->
   <tbody>
-  <tr th:each="curso : ${courses}">
+  <tr th:each="curso : ${list_course}">
     <td th:text="${curso.idc}"></td>
     <td th:text="${curso.name}"></td>
     <td th:text="${curso.description}"></td>
+    <td th:text="${curso.duration}"></td>
+    <td th:text="${curso.capacity}"></td>
   </tr>
   </tbody>
 </table>
