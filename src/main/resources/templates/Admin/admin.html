@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <head>
+        <title>Admins Page</title>
+        <meta charset="ISO-8859-1"/>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    </head>
+
+    <body>
+        <nav role="navigation" class="primary-navigation">
+            <ul>
+                <li><a th:href="@{/admin}">Home</a></li>
+                <li><a href="#">Tables&dtrif;</a>
+                    <ul class="dropdown">
+                        <li><a th:href="@{/admin/course}">Courses</a></li>
+                        <li><a th:href="@{/admin/student}">Students</a></li>
+                        <li><a th:href="@{/admin/teacher}">Teachers</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Profile</a></li>
+            </ul>
+        </nav>
+
+        <h1>Stats</h1>
+
+    </body>
+</html>

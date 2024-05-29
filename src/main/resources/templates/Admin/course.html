@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Admin - Course</title>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav role="navigation" class="primary-navigation">
+      <ul>
+        <li><a th:href="@{/admin}">Home</a></li>
+        <li><a href="#">Tables&dtrif;</a>
+          <ul class="dropdown">
+            <li><a th:href="@{/admin/course}">Courses</a></li>
+            <li><a th:href="@{/admin/student}">Students</a></li>
+            <li><a th:href="@{/admin/teacher}">Teachers</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Profile</a></li>
+      </ul>
+    </nav>
+
+    <h1>Listed Courses</h1>
+    <div th:if:text="${error_dC}" style="color: red;">
+      <p th:text="${error_dC}"></p>
+    </div>
+
+    <a th:href="@{/admin/course/addCourse}"> Add Course </a><br><br>
+    <table border="1" class="table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Duration</th>
+          <th>Capacity</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr th:each="curso : ${list_course}">
+          <td th:text="${curso.idc}"></td>
+          <td th:text="${curso.name}"></td>
+          <td th:text="${curso.description}"></td>
+          <td th:text="${curso.duration}"></td>
+          <td th:text="${curso.capacity}"></td>
+          <td><a th:href="@{/admin/course/deleteCourse/{id}(id=${curso.idc})}">Delete Course</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

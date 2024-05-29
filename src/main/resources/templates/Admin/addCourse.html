@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Admin - Add Course</title>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav role="navigation" class="primary-navigation">
+      <ul>
+        <li><a th:href="@{/admin}">Home</a></li>
+        <li><a href="#">Tables&dtrif;</a>
+          <ul class="dropdown">
+            <li><a th:href="@{/admin/course}">Courses</a></li>
+            <li><a th:href="@{/admin/student}">Students</a></li>
+            <li><a th:href="@{/admin/teacher}">Teachers</a></li>
+          </ul>
+        </li>
+        <li><a href="#">Profile</a></li>
+      </ul>
+    </nav>
+
+    <h1>Add Course</h1>
+
+    <div th:if:text="${error_aC}" style="color: red;">
+      <p th:text="${error_aC}"></p>
+    </div>
+
+    <form action="#" th:action="@{/admin/course/saveCourse}" th:object="${new_course}" method="POST">
+      <input type="text" autocomplete="off" required th:field="*{name}" placeholder="Name"><br><br>
+      <input type="text" autocomplete="off" required th:field="*{description}" placeholder="Description"><br><br>
+      <input type="number" autocomplete="off" min="5" max="50" required th:field="*{duration}" placeholder="Duration"><br><br>
+      <input type="number" autocomplete="off" min="0" max="30" required th:field="*{capacity}" placeholder="Capacity"><br><br>
+      <button type="submit">Add Course</button><br><br>
+    </form>
+
+  </body>
+</html>
