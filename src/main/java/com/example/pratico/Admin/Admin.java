@@ -8,7 +8,7 @@ import java.util.Objects;
 @Table(name = "admin")
 public class Admin {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Em AUTO dá valores de IDS mt grandes e sem serem sequenciais
     private int ida;
     private String name;
     private String password;

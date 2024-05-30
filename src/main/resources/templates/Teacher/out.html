@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Teacher - Student Out Course</title>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <nav role="navigation" class="primary-navigation">
+      <ul>
+        <li><a th:href="@{/teacher}">Home</a></li>
+        <li><a href="#">Students&dtrif;</a>
+          <ul class="dropdown">
+            <li><a th:href="@{/teacher/student}">All</a></li>
+            <li><a th:href="@{/teacher/student/in}">In Course</a></li>
+            <li><a th:href="@{/teacher/student/out}">Finalized/Abandoned</a></li>
+          </ul>
+        </li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+      </ul>
+    </nav>
+
+    <h1>Course Finalized</h1>
+
+    <table border="1" class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Birthdate</th>
+        <th>Address</th>
+        <th>Average</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="aluno : ${list_student_fin}">
+        <td th:text="${aluno.ids}"></td>
+        <td th:text="${aluno.name}"></td>
+        <td th:text="${aluno.email}"></td>
+        <td th:text="${aluno.birthdate}"></td>
+        <td th:text="${aluno.address}"></td>
+        <td th:text="${aluno.average}"></td>
+      </tr>
+      </tbody>
+    </table><br>
+
+    <h1>Abandoned Course</h1>
+
+    <table border="1" class="table">
+      <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Birthdate</th>
+        <th>Address</th>
+        <th>Average</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="aluno : ${list_student_exit}">
+        <td th:text="${aluno.ids}"></td>
+        <td th:text="${aluno.name}"></td>
+        <td th:text="${aluno.email}"></td>
+        <td th:text="${aluno.birthdate}"></td>
+        <td th:text="${aluno.address}"></td>
+        <td th:text="${aluno.average}"></td>
+      </tr>
+      </tbody>
+    </table><br>
+  </body>
+</html>

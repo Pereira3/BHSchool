@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -28,6 +32,7 @@ public class AdmController {
     @Autowired
     private AdminRepository adminRepository;
 
+    // ---------- PÁGINA INICIAL ----------
     @GetMapping("/admin")
     public String admins() {
         return "Admin/admin";
@@ -91,6 +96,14 @@ public class AdmController {
             return "redirect:/admin/student/addStudent";
         }
 
+        LocalDate bd = convertToLocalDateViaInstant(s.getBirthdate());
+        if (bd != null) {
+            Period age = Period.between(bd, LocalDate.now());
+            if (age.getYears() < 16){
+                rAttributes.addFlashAttribute("error_aS", "The student must be at least 16 years old.");
+                return "redirect:/admin/student/addStudent";
+            }
+        }
         studentRepository.save(s);
         return "redirect:/admin/student";
     }
@@ -139,5 +152,12 @@ public class AdmController {
 
         courseRepository.deleteById(idc);
         return "redirect:/admin/course";
+    }
+
+    // Site Spring -> https://www.baeldung.com/java-date-to-localdate-and-localdatetime
+    public LocalDate convertToLocalDateViaInstant(Date dateToConvert) {
+        return dateToConvert.toInstant()
+                .atZone(ZoneId.systemDefault())
+                .toLocalDate();
     }
 }

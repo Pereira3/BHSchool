@@ -1,6 +1,8 @@
 package com.example.pratico.Teacher;
 
 import java.util.List;
+
+import com.example.pratico.Course.Course;
 import org.springframework.data.repository.CrudRepository;
 
 

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Teacher's Page</title>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav role="navigation" class="primary-navigation">
+        <ul>
+            <li><a th:href="@{/teacher}">Home</a></li>
+            <li><a href="#">Students&dtrif;</a>
+                <ul class="dropdown">
+                    <li><a th:href="@{/teacher/student}">All</a></li>
+                    <li><a th:href="@{/teacher/student/in}">In Course</a></li>
+                    <li><a th:href="@{/teacher/student/out}">Finalized/Abandoned</a></li>
+                </ul>
+            </li>
+            <li><a th:href="@{/logout}">Logout</a></li>
+        </ul>
+    </nav>
+
+    <h1>Stats</h1>
+    <p>Course: <span th:text="${course}"></span></p>
+</body>
+</html>

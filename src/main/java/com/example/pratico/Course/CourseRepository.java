@@ -6,4 +6,5 @@ import java.util.List;
 public interface CourseRepository extends CrudRepository<Course, Integer> {
     List<Course> findAll();
     Course findCourseByName(String name);
+    Course findCourseByIdc(int idc);
 }

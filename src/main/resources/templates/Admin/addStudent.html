@@ -18,7 +18,7 @@
                         <li><a th:href="@{/admin/teacher}">Teachers</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Profile</a></li>
+                <li><a th:href="@{/logout}">Logout</a></li>
             </ul>
         </nav>
 
@@ -34,11 +34,28 @@
             <input type="email" autocomplete="off" required th:field="*{email}" placeholder="Email"><br><br>
             <input type="date" autocomplete="off" required th:field="*{birthdate}" placeholder="Birthdate"><br><br>
             <input type="text" autocomplete="off" required th:field="*{address}" placeholder="Address"><br><br>
-            <input type="number" min="0" max="10" autocomplete="off" required th:field="*{idc}" placeholder="Course ID"><br><br>
-            <input type="number" min="0" max="20" step="0.01" autocomplete="off" required th:field="*{average}" placeholder="Average"><br><br>
-            <input type="number" min="1" max="3" autocomplete="off" required th:field="*{state}" placeholder="State"><br><br>
+            <input type="number" min="1" max="10" autocomplete="off" required th:field="*{idc}" placeholder="Course ID"><br><br>
+            <input type="number" id="average" min="0.0" max="20.0" step="0.1" autocomplete="off" required th:field="*{average}" placeholder="Average"><br><br>
+            <input type="hidden" id="state" th:field="*{state}">
             <button type="submit">Add Student</button><br><br>
         </form>
-
     </body>
+
+    <script> // Tem q ser posto depois o body se não o getElementById é nulo
+        var a_input = document.getElementById("average");
+
+        document.getElementById("state").defaultValue = 1;
+
+        a_input.addEventListener("input", function () {
+            // Se a média for inferior a 9,5 o state é obrigatóriamente 0
+            if (parseFloat(a_input.value) < 9.5 && parseFloat(a_input.value) > 0.0) {
+                document.getElementById("state").value = 0;
+            } else if (parseFloat(a_input.value) >= 9.5) {
+                document.getElementById("state").value = 2;
+            } else if (parseFloat(a_input.value) === 0.0) { // EM CURSO
+                document.getElementById("state").value = 1;
+            }
+        });
+    </script>
+
 </html>

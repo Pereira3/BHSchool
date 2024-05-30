@@ -1,6 +1,8 @@
 package com.example.pratico.Student;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -8,12 +10,13 @@ import java.util.Objects;
 public class Student{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Em AUTO dá valores de IDS mt grandes e sem serem sequenciais
     private int ids;
     private String name;
     private String password;
     private String email;
-    private String birthdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthdate;
     private String address;
     private int idc;
     private float average;
@@ -44,10 +47,10 @@ public class Student{
         this.email = email;
     }
 
-    public String getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 

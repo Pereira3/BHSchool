@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teacher - Student In Course</title>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+</head>
+
+<script>
+    function changeAverage() {
+        var inputField = document.getElementById("changingAverage");
+        if (inputField.style.display === "none") {
+            inputField.style.display = "flex";
+        } else {
+            inputField.style.display = "none";
+        }
+    }
+</script>
+
+<body>
+<nav role="navigation" class="primary-navigation">
+    <ul>
+        <li><a th:href="@{/teacher}">Home</a></li>
+        <li><a href="#">Students&dtrif;</a>
+            <ul class="dropdown">
+                <li><a th:href="@{/teacher/student}">All</a></li>
+                <li><a th:href="@{/teacher/student/in}">In Course</a></li>
+                <li><a th:href="@{/teacher/student/out}">Finalized/Abandoned</a></li>
+            </ul>
+        </li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</nav>
+
+<h1>In Course</h1>
+
+<table border="1" class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Birthdate</th>
+        <th>Address</th>
+        <th>Average</th>
+        <th>Management</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="aluno : ${list_student_in}">
+        <td th:text="${aluno.ids}"></td>
+        <td th:text="${aluno.name}"></td>
+        <td th:text="${aluno.email}"></td>
+        <td th:text="${aluno.birthdate}"></td>
+        <td th:text="${aluno.address}"></td>
+        <td th:text="${aluno.average}"></td>
+        <td><a href="#" onclick="changeAverage()">Change Average</a></td>
+    </tr>
+    </tbody>
+</table><br>
+<div>
+    <p id="changingAverage" style="display: none;">Nota:&nbsp<input type="text">&nbsp<button type="submit">Change</button><br><br></p>
+</div>
+</body>
+</html>

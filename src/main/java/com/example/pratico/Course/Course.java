@@ -6,7 +6,7 @@ import java.util.Objects;
 @Table(name = "course")
 public class Course {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //Em AUTO dá valores de IDS mt grandes e sem serem sequenciais
     public int idc;
     private String name;
     private String description;

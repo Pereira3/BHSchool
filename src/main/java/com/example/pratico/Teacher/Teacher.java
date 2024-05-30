@@ -1,5 +1,8 @@
 package com.example.pratico.Teacher;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -7,12 +10,13 @@ import java.util.Objects;
 public class Teacher{
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idt;
     private String name;
     private String password;
     private String email;
-    private String birthdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date birthdate;
     private String address;
     private int idc;
     private int salary;
@@ -42,10 +46,10 @@ public class Teacher{
         this.email = email;
     }
 
-    public String getBirthdate() {
+    public Date getBirthdate() {
         return birthdate;
     }
-    public void setBirthdate(String birthdate) {
+    public void setBirthdate(Date birthdate) {
         this.birthdate = birthdate;
     }
 

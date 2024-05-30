@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Admin - Student</title>
+        <title>Teacher - Students</title>
         <meta charset="ISO-8859-1"/>
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
@@ -10,12 +10,12 @@
     <body>
         <nav role="navigation" class="primary-navigation">
             <ul>
-                <li><a th:href="@{/admin}">Home</a></li>
-                <li><a href="#">Tables&dtrif;</a>
+                <li><a th:href="@{/teacher}">Home</a></li>
+                <li><a href="#">Students&dtrif;</a>
                     <ul class="dropdown">
-                        <li><a th:href="@{/admin/course}">Courses</a></li>
-                        <li><a th:href="@{/admin/student}">Students</a></li>
-                        <li><a th:href="@{/admin/teacher}">Teachers</a></li>
+                        <li><a th:href="@{/teacher/student}">All</a></li>
+                        <li><a th:href="@{/teacher/student/in}">In Course</a></li>
+                        <li><a th:href="@{/teacher/student/out}">Finalized/Abandoned</a></li>
                     </ul>
                 </li>
                 <li><a th:href="@{/logout}">Logout</a></li>
@@ -24,7 +24,6 @@
 
         <h1>Listed Students</h1>
 
-        <a th:href="@{/admin/student/addStudent}"> Add Student </a><br><br>
         <table border="1" class="table">
             <thead>
                 <tr>
@@ -33,10 +32,7 @@
                     <th>Email</th>
                     <th>Birthdate</th>
                     <th>Address</th>
-                    <th>Course</th>
                     <th>Average</th>
-                    <th>State</th>
-                    <th>Management</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,10 +42,7 @@
                     <td th:text="${aluno.email}"></td>
                     <td th:text="${aluno.birthdate}"></td>
                     <td th:text="${aluno.address}"></td>
-                    <td th:text="${aluno.idc}"></td>
                     <td th:text="${aluno.average}"></td>
-                    <td th:text="${aluno.state}"></td>
-                    <td><a th:href="@{/admin/student/deleteStudent/{id}(id=${aluno.ids})}">Delete Student</a></td>
                 </tr>
             </tbody>
         </table>
