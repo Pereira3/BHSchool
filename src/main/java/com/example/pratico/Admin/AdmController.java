@@ -5,6 +5,7 @@ import com.example.pratico.Student.Student;
 import com.example.pratico.Student.StudentRepository;
 import com.example.pratico.Teacher.Teacher;
 import com.example.pratico.Teacher.TeacherRepository;
+import com.google.common.hash.Hashing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import com.google.common.collect.Sets;
+import static com.google.common.collect.Streams.zip;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
@@ -62,6 +66,11 @@ public class AdmController {
             return "redirect:/admin/teacher/addTeacher";
         }
 
+        // Transformar pass em hash sha256
+        String sha256hex = Hashing.sha256().hashString(t.getPassword(), StandardCharsets.UTF_8).toString();
+
+        t.setPassword(sha256hex);
+
         teacherRepository.save(t);
         return "redirect:/admin/teacher";
     }
@@ -90,6 +99,11 @@ public class AdmController {
         Teacher t_existence = teacherRepository.findTeacherByEmail(s.getEmail());
         Student s_existence = studentRepository.findStudentByEmail(s.getEmail());
         Admin a_existence = adminRepository.findAdminByEmail(s.getEmail());
+
+        // Transformar pass em hash sha256
+        String sha256hex = Hashing.sha256().hashString(s.getPassword(), StandardCharsets.UTF_8).toString();
+
+        s.setPassword(sha256hex);
 
         if (t_existence != null || s_existence != null || a_existence != null) { //Há alguém com o mesmo email
             rAttributes.addFlashAttribute("error_aS", "Email already exists...");

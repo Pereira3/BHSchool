@@ -6,6 +6,7 @@ import com.example.pratico.Student.Student;
 import com.example.pratico.Student.StudentRepository;
 import com.example.pratico.Teacher.Teacher;
 import com.example.pratico.Teacher.TeacherRepository;
+import com.google.common.hash.Hashing;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +39,11 @@ public class GeneralController {
     @PostMapping("index")
     public String login(@RequestParam String email, @RequestParam String password, RedirectAttributes rAttributes, HttpSession session){
 
-        Teacher t_existence = teacherRepository.findTeacherByEmailAndPassword(email, password);
-        Student s_existence = studentRepository.findStudentByEmailAndPassword(email, password);
-        Admin a_existence = adminRepository.findAdminByEmailAndPassword(email, password);
+        String sha256hex = Hashing.sha256().hashString(password, StandardCharsets.UTF_8).toString();
+
+        Teacher t_existence = teacherRepository.findTeacherByEmailAndPassword(email, sha256hex);
+        Student s_existence = studentRepository.findStudentByEmailAndPassword(email, sha256hex);
+        Admin a_existence = adminRepository.findAdminByEmailAndPassword(email, sha256hex);
 
         if (t_existence != null) { // Há um professor com as credenciais postas
             session.setAttribute("loggedUser", email);
