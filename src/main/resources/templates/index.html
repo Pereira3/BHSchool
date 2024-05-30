@@ -1,12 +1,22 @@
 <!DOCTYPE HTML>
 <html lang="pt">
     <head>
-        <title>Getting Started: Serving Web Content</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Login's Page</title>
+        <meta charset="ISO-8859-1"/>
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
     </head>
     <body>
-        <p>Admin: <a href="http://localhost:8080/admin">here</a></p>
-        <p>Alunos: <a href="http://localhost:8080/student">here</a></p>
-        <p>Professores: <a href="http://localhost:8080/teacher">here</a></p>
+        <h1>Login</h1>
+
+        <div th:if:text="${error_login}" style="color: red;">
+            <p th:text="${error_login}"></p>
+        </div>
+
+        <form th:action="@{/index}" method="post">
+            <input type="email" name="email" placeholder="Email" required autocomplete="off"><br><br>
+            <input type="password" name="password" placeholder="Password" required autocomplete="off"><br><br>
+            <button type="submit">Login</button>
+        </form>
     </body>
 </html>

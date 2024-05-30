@@ -29,7 +29,7 @@ public class AdmController {
     private AdminRepository adminRepository;
 
     @GetMapping("/admin")
-    public String admins(Model model) {
+    public String admins() {
         return "Admin/admin";
     }
 
