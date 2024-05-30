@@ -22,10 +22,11 @@
             </ul>
         </nav>
 
+        <div class="table_div">
         <h1>Listed Students</h1>
+            <button class="add_button" type="button" onclick="window.location.href='/admin/student/addStudent'">Add Student</button><br><br>
 
-        <a th:href="@{/admin/student/addStudent}"> Add Student </a><br><br>
-        <table border="1" class="table">
+            <table border="1" class="table">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -44,7 +45,7 @@
                     <td th:text="${aluno.ids}"></td>
                     <td th:text="${aluno.name}"></td>
                     <td th:text="${aluno.email}"></td>
-                    <td th:text="${aluno.birthdate}"></td>
+                    <td th:text="${aluno.birthdate.getDay()} + '/' + ${aluno.birthdate.getMonth()} + '/' + ${aluno.birthdate.year + 1900}" ></td>
                     <td th:text="${aluno.address}"></td>
                     <td th:text="${aluno.idc}"></td>
                     <td th:text="${aluno.average}"></td>
@@ -53,5 +54,6 @@
                 </tr>
             </tbody>
         </table>
+            </div>
     </body>
 </html>

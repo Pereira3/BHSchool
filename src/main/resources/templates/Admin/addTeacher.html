@@ -22,6 +22,8 @@
             </ul>
         </nav>
 
+        <div class="add_form">
+
         <h1>Add Teacher</h1>
 
         <div th:if:text="${error_aT}" style="color: red;">
@@ -29,15 +31,18 @@
         </div>
 
         <form action="#" th:action="@{/admin/teacher/saveTeacher}" th:object="${new_teacher}" method="POST">
-            <input type="text" autocomplete="off" required th:field="*{name}" placeholder="Name"><br><br>
-            <input type="password" autocomplete="off" required th:field="*{password}" placeholder="Password"><br><br>
-            <input type="email" autocomplete="off" required th:field="*{email}" placeholder="Email"><br><br>
-            <input type="date" autocomplete="off" required th:field="*{birthdate}" placeholder="Birthdate"><br><br>
-            <input type="text" autocomplete="off" required th:field="*{address}" placeholder="Address"><br><br>
-            <input type="number" min="0" autocomplete="off" required th:field="*{idc}" placeholder="Course ID"><br><br>
-            <input type="number" min="10" max="25" value="10" autocomplete="off" required th:field="*{salary}" placeholder="Salary"><br><br>
-            <button type="submit">Add Teacher</button><br><br>
+            <input type="text" autocomplete="off" required th:field="*{name}" placeholder="Name">
+            <input type="password" autocomplete="off" required th:field="*{password}" placeholder="Password">
+            <input type="email" autocomplete="off" required th:field="*{email}" placeholder="Email">
+            <input type="text" autocomplete="off" required th:field="*{address}" placeholder="Address">
+            <label for="birthdate">Birthdate:</label>
+            <input id="birthdate" type="date" autocomplete="off" required th:field="*{birthdate}" placeholder="Birthdate">
+            <label for="idc">Course ID:</label>
+            <input id="idc" type="number" min="0" autocomplete="off" required th:field="*{idc}" placeholder="Course ID">
+            <label for="salary">Salary:</label>
+            <input id="salary" type="number" min="10" max="25" value="10" autocomplete="off" required th:field="*{salary}" placeholder="Salary">
+            <button type="submit">Add Teacher</button>
         </form>
-
+        </div>
     </body>
 </html>

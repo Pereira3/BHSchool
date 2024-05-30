@@ -22,6 +22,8 @@
       </ul>
     </nav>
 
+
+    <div class="add_form">
     <h1>Add Course</h1>
 
     <div th:if:text="${error_aC}" style="color: red;">
@@ -29,12 +31,16 @@
     </div>
 
     <form action="#" th:action="@{/admin/course/saveCourse}" th:object="${new_course}" method="POST">
-      <input type="text" autocomplete="off" required th:field="*{name}" placeholder="Name"><br><br>
-      <input type="text" autocomplete="off" required th:field="*{description}" placeholder="Description"><br><br>
-      <input type="number" autocomplete="off" min="5" max="50" required th:field="*{duration}" placeholder="Duration"><br><br>
-      <input type="number" autocomplete="off" min="0" max="30" required th:field="*{capacity}" placeholder="Capacity"><br><br>
-      <button type="submit">Add Course</button><br><br>
-    </form>
+      <input type="text" autocomplete="off" required th:field="*{name}" placeholder="Name">
+      <input type="text" autocomplete="off" required th:field="*{description}" placeholder="Description">
 
+      <label for="duration">Duration (in hours):</label>
+      <input type="number" id="duration" name="duration" autocomplete="off" min="5" max="50" required th:field="*{duration}" placeholder="Duration">
+
+      <label for="capacity">Capacity:</label>
+      <input type="number" id="capacity" name="capacity" autocomplete="off" min="0" max="30" required th:field="*{capacity}" placeholder="Capacity">
+      <button type="submit">Add Course</button>
+    </form>
+    </div>
   </body>
 </html>

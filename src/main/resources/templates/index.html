@@ -7,16 +7,16 @@
         <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
     </head>
     <body>
+    <div th:if:text="${error_login}" style="color: red;">
+        <p th:text="${error_login}"></p>
+    </div>
+    <div class="login_div">
         <h1>Login</h1>
-
-        <div th:if:text="${error_login}" style="color: red;">
-            <p th:text="${error_login}"></p>
-        </div>
-
         <form th:action="@{/index}" method="post">
-            <input type="email" name="email" placeholder="Email" required autocomplete="off"><br><br>
-            <input type="password" name="password" placeholder="Password" required autocomplete="off"><br><br>
+            <input type="email" id="email" name="email" placeholder="Email" required autocomplete="off">
+            <input type="password" id="password" name="password" placeholder="Password" required autocomplete="off">
             <button type="submit">Login</button>
         </form>
+    </div>
     </body>
 </html>

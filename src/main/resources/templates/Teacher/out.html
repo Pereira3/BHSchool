@@ -22,6 +22,8 @@
       </ul>
     </nav>
 
+    <div class="table_div">
+
     <h1>Course Finalized</h1>
 
     <table border="1" class="table">
@@ -40,12 +42,15 @@
         <td th:text="${aluno.ids}"></td>
         <td th:text="${aluno.name}"></td>
         <td th:text="${aluno.email}"></td>
-        <td th:text="${aluno.birthdate}"></td>
+        <td th:text="${aluno.birthdate.getDay()} + '/' + ${aluno.birthdate.getMonth()} + '/' + ${aluno.birthdate.year + 1900}" ></td>
         <td th:text="${aluno.address}"></td>
         <td th:text="${aluno.average}"></td>
       </tr>
       </tbody>
     </table><br>
+    </div>
+
+    <div class="table_div">
 
     <h1>Abandoned Course</h1>
 
@@ -65,11 +70,12 @@
         <td th:text="${aluno.ids}"></td>
         <td th:text="${aluno.name}"></td>
         <td th:text="${aluno.email}"></td>
-        <td th:text="${aluno.birthdate}"></td>
+        <td th:text="${aluno.birthdate.getDay()} + '/' + ${aluno.birthdate.getMonth()} + '/' + ${aluno.birthdate.year + 1900}" ></td>
         <td th:text="${aluno.address}"></td>
         <td th:text="${aluno.average}"></td>
       </tr>
       </tbody>
     </table><br>
+    </div>
   </body>
 </html>

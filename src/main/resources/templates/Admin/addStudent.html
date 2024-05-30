@@ -22,6 +22,7 @@
             </ul>
         </nav>
 
+        <div class="add_form">
         <h1>Add Student</h1>
 
         <div th:if:text="${error_aS}" style="color: red;">
@@ -29,16 +30,20 @@
         </div>
 
         <form action="#" th:action="@{/admin/student/saveStudent}" th:object="${new_student}" method="POST">
-            <input type="text" autocomplete="off" required th:field="*{name}" placeholder="Name"><br><br>
-            <input type="password" autocomplete="off" required th:field="*{password}" placeholder="Password"><br><br>
-            <input type="email" autocomplete="off" required th:field="*{email}" placeholder="Email"><br><br>
-            <input type="date" autocomplete="off" required th:field="*{birthdate}" placeholder="Birthdate"><br><br>
-            <input type="text" autocomplete="off" required th:field="*{address}" placeholder="Address"><br><br>
-            <input type="number" min="1" max="10" autocomplete="off" required th:field="*{idc}" placeholder="Course ID"><br><br>
-            <input type="number" id="average" min="0.0" max="20.0" step="0.1" autocomplete="off" required th:field="*{average}" placeholder="Average"><br><br>
+            <input type="text" autocomplete="off" required th:field="*{name}" placeholder="Name">
+            <input type="password" autocomplete="off" required th:field="*{password}" placeholder="Password">
+            <input type="email" autocomplete="off" required th:field="*{email}" placeholder="Email">
+            <input type="text" autocomplete="off" required th:field="*{address}" placeholder="Address">
+            <label for="birthdate">Birthdate:</label>
+            <input id="birthdate" name="birthdate" type="date" autocomplete="off" required th:field="*{birthdate}" placeholder="Birthdate">
+            <label for="idc">Course ID:</label>
+            <input id="idc" type="number" min="1" max="10" autocomplete="off" required th:field="*{idc}" placeholder="Course ID">
+            <label for="average">Average:</label>
+            <input type="number" id="average" min="0.0" max="20.0" step="0.1" autocomplete="off" required th:field="*{average}" placeholder="Average">
             <input type="hidden" id="state" th:field="*{state}">
-            <button type="submit">Add Student</button><br><br>
+            <button type="submit">Add Student</button>
         </form>
+        </div>
     </body>
 
     <script> // Tem q ser posto depois o body se não o getElementById é nulo

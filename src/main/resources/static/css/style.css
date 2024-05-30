@@ -3,6 +3,9 @@ body {
     background-color: #D9DCD6;
     margin: 0;
     padding: 0;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
 }
 
 nav {
@@ -87,3 +90,157 @@ a {
 
 ul li ul li a { transition: all 0.5s ease; }
 
+.table_div{
+    margin: 50px auto;
+    width: fit-content;
+    padding-bottom: 25px;
+}
+
+.add_button{
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #3ca0e7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add_button:hover{
+    background-color: #56a4e0;
+}
+
+table {
+    border-collapse: collapse;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+}
+
+thead tr {
+    background-color: #3ca0e7;
+    color: #ffffff;
+    text-align: left;
+    border-bottom: none;
+}
+
+th, td {
+    padding: 12px 15px;
+    border-left: none;
+    border-right: none;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+tbody tr:hover {
+    background-color: #c7c6c6;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 3px solid #3ca0e7;
+}
+
+tbody tr.active-row {
+    font-weight: bold;
+    color: #009879;
+}
+
+.login_div {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Adjust the width as needed */
+    margin: auto; /* Center the container horizontally and vertically */
+}
+
+.login_div h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login_div input {
+    width: 80%;
+    /*Center*/
+    display: block;
+    margin: 20px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.login_div button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: none;
+    background-color: #3ca0e7;
+    color: white;
+    cursor: pointer;
+    font-family: 'Arvo', serif;
+    font-size: 16px;
+}
+
+.login_div button:hover {
+    background-color: #56a4e0;
+}
+
+.error_message {
+    color: red;
+    text-align: center;
+    margin: 10px 0;
+}
+
+.add_form {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px; /* Adjust the width as needed */
+    margin: 40px auto; /* Center the container horizontally and vertically */
+}
+
+.add_form label {
+    display: block;
+    font-size: 13px;
+    margin-left: 20px;
+}
+
+.add_form h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.add_form input {
+    width: 80%;
+    /*Center*/
+    display: block;
+    margin: 10px auto;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.add_form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: #3ca0e7;
+    color: white;
+    cursor: pointer;
+    font-family: 'Arvo', serif;
+    font-size: 16px;
+}
+
+.add_form button:hover {
+    background-color: #56a4e0;
+}

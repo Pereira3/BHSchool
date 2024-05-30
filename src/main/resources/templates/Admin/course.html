@@ -22,12 +22,9 @@
       </ul>
     </nav>
 
+    <div class="table_div">
     <h1>Listed Courses</h1>
-    <div th:if:text="${error_dC}" style="color: red;">
-      <p th:text="${error_dC}"></p>
-    </div>
-
-    <a th:href="@{/admin/course/addCourse}"> Add Course </a><br><br>
+      <button class="add_button" type="button" onclick="window.location.href='/admin/course/addCourse'">Add Course</button><br><br>
     <table border="1" class="table">
       <thead>
         <tr>
@@ -36,6 +33,7 @@
           <th>Description</th>
           <th>Duration</th>
           <th>Capacity</th>
+          <th>Management</th>
         </tr>
       </thead>
       <tbody>
@@ -49,5 +47,6 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </body>
 </html>
