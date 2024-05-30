@@ -11,7 +11,7 @@
     function changeAverage() {
         var inputField = document.getElementById("changingAverage");
         if (inputField.style.display === "none") {
-            inputField.style.display = "flex";
+            inputField.style.display = "inline";
         } else {
             inputField.style.display = "none";
         }
@@ -61,9 +61,14 @@
     </tr>
     </tbody>
 </table><br>
+
 <div>
-    <p id="changingAverage" style="display: none;">Nota:&nbsp<input type="text">&nbsp<button type="submit">Change</button><br><br></p>
+    <p id="changingAverage" style="display: none;">
+        Nota:&nbsp<input type="text">&nbsp
+        <button type="submit" onclick="changeAverage()">Change</button><br><br>
+    </p>
 </div>
+
 </div>
 </body>
 </html>

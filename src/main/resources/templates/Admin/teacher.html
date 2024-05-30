@@ -37,7 +37,7 @@
                     <th>Address</th>
                     <th>Course</th>
                     <th>Salary</th>
-                    <th>Management</th>
+                    <th>Manage</th>
                 </tr>
             </thead>
             <tbody>
@@ -49,7 +49,7 @@
                     <td th:text="${professor.address}"></td>
                     <td th:text="${professor.idc}"></td>
                     <td th:text="${professor.salary}"></td>
-                    <td><a th:href="@{/admin/teacher/deleteTeacher/{id}(id=${professor.idt})}">Delete Teacher</a></td>
+                    <td><a th:href="@{/admin/teacher/deleteTeacher/{id}(id=${professor.idt})}">Delete</a></td>
                 </tr>
             </tbody>
         </table>

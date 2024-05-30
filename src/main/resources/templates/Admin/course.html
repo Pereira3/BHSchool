@@ -33,7 +33,7 @@
           <th>Description</th>
           <th>Duration</th>
           <th>Capacity</th>
-          <th>Management</th>
+          <th>Manage</th>
         </tr>
       </thead>
       <tbody>
@@ -43,7 +43,7 @@
           <td th:text="${curso.description}"></td>
           <td th:text="${curso.duration}"></td>
           <td th:text="${curso.capacity}"></td>
-          <td><a th:href="@{/admin/course/deleteCourse/{id}(id=${curso.idc})}">Delete Course</a></td>
+          <td><a th:href="@{/admin/course/deleteCourse/{id}(id=${curso.idc})}">Delete</a></td>
         </tr>
       </tbody>
     </table>

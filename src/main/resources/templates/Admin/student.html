@@ -37,7 +37,7 @@
                     <th>Course</th>
                     <th>Average</th>
                     <th>State</th>
-                    <th>Management</th>
+                    <th>Manage</th>
                 </tr>
             </thead>
             <tbody>
@@ -50,7 +50,7 @@
                     <td th:text="${aluno.idc}"></td>
                     <td th:text="${aluno.average}"></td>
                     <td th:text="${aluno.state}"></td>
-                    <td><a th:href="@{/admin/student/deleteStudent/{id}(id=${aluno.ids})}">Delete Student</a></td>
+                    <td id="tentar"><a th:href="@{/admin/student/deleteStudent/{id}(id=${aluno.ids})}">Delete</a></td>
                 </tr>
             </tbody>
         </table>
