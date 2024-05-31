@@ -6,6 +6,7 @@ import com.example.pratico.Student.StudentRepository;
 import com.example.pratico.Teacher.Teacher;
 import com.example.pratico.Teacher.TeacherRepository;
 import com.google.common.hash.Hashing;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.google.common.collect.Sets;
-import static com.google.common.collect.Streams.zip;
 
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -38,7 +37,11 @@ public class AdmController {
 
     // ---------- PÁGINA INICIAL ----------
     @GetMapping("/admin")
-    public String admins() {
+    public String admins(HttpSession session) {
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
         return "Admin/admin";
     }
 
@@ -71,6 +74,15 @@ public class AdmController {
 
         t.setPassword(sha256hex);
 
+        LocalDate bdt = convertToLocalDateViaInstant(t.getBirthdate());
+        if (bdt != null) {
+            Period age = Period.between(bdt, LocalDate.now());
+            if (age.getYears() < 22){
+                rAttributes.addFlashAttribute("error_aT", "The teacher must be at least 22 years old.");
+                return "redirect:/admin/teacher/addTeacher";
+            }
+        }
+
         teacherRepository.save(t);
         return "redirect:/admin/teacher";
     }
@@ -87,6 +99,7 @@ public class AdmController {
         model.addAttribute("list_student", studentRepository.findAll());
         return "/Admin/student";
     }
+
     @GetMapping("/admin/student/addStudent")
     public String aStudent(Model model) {
         Student s = new Student();
@@ -110,9 +123,9 @@ public class AdmController {
             return "redirect:/admin/student/addStudent";
         }
 
-        LocalDate bd = convertToLocalDateViaInstant(s.getBirthdate());
-        if (bd != null) {
-            Period age = Period.between(bd, LocalDate.now());
+        LocalDate bds = convertToLocalDateViaInstant(s.getBirthdate());
+        if (bds != null) {
+            Period age = Period.between(bds, LocalDate.now());
             if (age.getYears() < 16){
                 rAttributes.addFlashAttribute("error_aS", "The student must be at least 16 years old.");
                 return "redirect:/admin/student/addStudent";

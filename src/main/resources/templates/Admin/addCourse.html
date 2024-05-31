@@ -31,12 +31,12 @@
     </div>
 
     <form action="#" th:action="@{/admin/course/saveCourse}" th:object="${new_course}" method="POST">
-      <input type="text" autocomplete="off" required th:field="*{name}" placeholder="Name">
-      <input type="text" autocomplete="off" required th:field="*{description}" placeholder="Description">
-
+      <label for="name">Name:</label>
+      <input id="name" type="text" autocomplete="off" required th:field="*{name}" placeholder="Name">
+      <label for="description">Description:</label>
+      <input id="description" type="text" autocomplete="off" required th:field="*{description}" placeholder="Description">
       <label for="duration">Duration (in hours):</label>
       <input type="number" id="duration" name="duration" autocomplete="off" min="5" max="50" required th:field="*{duration}" placeholder="Duration">
-
       <label for="capacity">Capacity:</label>
       <input type="number" id="capacity" name="capacity" autocomplete="off" min="0" max="30" required th:field="*{capacity}" placeholder="Capacity">
       <button type="submit">Add Course</button>

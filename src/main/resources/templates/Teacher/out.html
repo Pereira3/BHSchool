@@ -42,7 +42,7 @@
         <td th:text="${aluno.ids}"></td>
         <td th:text="${aluno.name}"></td>
         <td th:text="${aluno.email}"></td>
-        <td th:text="${aluno.birthdate.getDay()} + '/' + ${aluno.birthdate.getMonth()} + '/' + ${aluno.birthdate.year + 1900}" ></td>
+        <td th:text="${#dates.format(aluno.birthdate, 'dd/MM/yyyy')}" ></td>
         <td th:text="${aluno.address}"></td>
         <td th:text="${aluno.average}"></td>
       </tr>
@@ -70,7 +70,7 @@
         <td th:text="${aluno.ids}"></td>
         <td th:text="${aluno.name}"></td>
         <td th:text="${aluno.email}"></td>
-        <td th:text="${aluno.birthdate.getDay()} + '/' + ${aluno.birthdate.getMonth()} + '/' + ${aluno.birthdate.year + 1900}" ></td>
+        <td th:text="${#dates.format(aluno.birthdate, 'dd/MM/yyyy')}" ></td>
         <td th:text="${aluno.address}"></td>
         <td th:text="${aluno.average}"></td>
       </tr>

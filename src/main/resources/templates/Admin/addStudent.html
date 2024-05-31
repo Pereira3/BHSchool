@@ -30,10 +30,14 @@
         </div>
 
         <form action="#" th:action="@{/admin/student/saveStudent}" th:object="${new_student}" method="POST">
-            <input type="text" autocomplete="off" required th:field="*{name}" placeholder="Name">
-            <input type="password" autocomplete="off" required th:field="*{password}" placeholder="Password">
-            <input type="email" autocomplete="off" required th:field="*{email}" placeholder="Email">
-            <input type="text" autocomplete="off" required th:field="*{address}" placeholder="Address">
+            <label for="name">Name:</label>
+            <input id="name" type="text" autocomplete="off" required th:field="*{name}" placeholder="Name">
+            <label for="password">Password:</label>
+            <input id="password" type="password" autocomplete="off" required th:field="*{password}" placeholder="Password">
+            <label for="email">Email:</label>
+            <input id="email" type="email" autocomplete="off" required th:field="*{email}" placeholder="Email">
+            <label for="address">Address:</label>
+            <input id="address" type="text" autocomplete="off" required th:field="*{address}" placeholder="Address">
             <label for="birthdate">Birthdate:</label>
             <input id="birthdate" name="birthdate" type="date" autocomplete="off" required th:field="*{birthdate}" placeholder="Birthdate">
             <label for="idc">Course ID:</label>

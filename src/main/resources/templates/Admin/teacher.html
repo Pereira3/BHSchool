@@ -45,7 +45,7 @@
                     <td th:text="${professor.idt}"></td>
                     <td th:text="${professor.name}"></td>
                     <td th:text="${professor.email}"></td>
-                    <td th:text="${professor.birthdate.getDay()} + '/' + ${professor.birthdate.getMonth()} + '/' + ${professor.birthdate.year + 1900}" ></td>
+                    <td th:text="${#dates.format(professor.birthdate, 'dd/MM/yyyy')}" ></td>
                     <td th:text="${professor.address}"></td>
                     <td th:text="${professor.idc}"></td>
                     <td th:text="${professor.salary}"></td>

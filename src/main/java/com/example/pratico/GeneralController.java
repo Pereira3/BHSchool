@@ -65,4 +65,9 @@ public class GeneralController {
         session.invalidate();
         return "redirect:/index";
     }
+
+    @GetMapping("/error")
+    public String error() {
+        return "redirect:/error";
+    }
 }

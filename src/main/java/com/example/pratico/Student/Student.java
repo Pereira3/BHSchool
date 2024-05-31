@@ -2,6 +2,7 @@ package com.example.pratico.Student;
 import jakarta.persistence.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.management.relation.Role;
 import java.util.Date;
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class Student{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthdate;
     private String address;
+    private String gender;
     private int idc;
     private float average;
     private int state; //1 - em Curso || 2 - Finalizado || 3 - Desistiu
