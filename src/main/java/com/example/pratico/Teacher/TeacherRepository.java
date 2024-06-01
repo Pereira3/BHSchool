@@ -11,5 +11,6 @@ public interface TeacherRepository extends CrudRepository<Teacher, Integer>{
     Teacher findTeacherByEmail(String email);
     List<Teacher> findTeachersByIdc(int idc);
     Teacher findTeacherByEmailAndPassword(String email, String password);
+    Teacher findTeacherByIdt(int idt);
     int countStudentsByGender(String gender);
 }

@@ -35,9 +35,11 @@
                     <th>Email</th>
                     <th>Birthdate</th>
                     <th>Address</th>
+                    <th>Gender</th>
                     <th>Course</th>
                     <th>Salary</th>
-                    <th>Manage</th>
+                    <th>Change</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,8 +49,10 @@
                     <td th:text="${professor.email}"></td>
                     <td th:text="${#dates.format(professor.birthdate, 'dd/MM/yyyy')}" ></td>
                     <td th:text="${professor.address}"></td>
+                    <td th:text="${professor.gender}"></td>
                     <td th:text="${professor.idc}"></td>
                     <td th:text="${professor.salary}"></td>
+                    <td><a th:href="@{/admin/teacher/editTeacher/{id}(id=${professor.idt})}">Change</a></td>
                     <td><a th:href="@{/admin/teacher/deleteTeacher/{id}(id=${professor.idt})}">Delete</a></td>
                 </tr>
             </tbody>

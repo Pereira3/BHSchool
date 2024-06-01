@@ -25,7 +25,12 @@
     <div class="table_div">
     <h1>Listed Courses</h1>
       <button class="add_button" type="button" onclick="window.location.href='/admin/course/addCourse'">Add Course</button><br><br>
-    <table border="1" class="table">
+
+      <div th:if:text="${error_aC}" style="color: red;">
+        <p th:text="${error_aC}"></p>
+      </div>
+
+      <table border="1" class="table">
       <thead>
         <tr>
           <th>ID</th>
@@ -33,7 +38,8 @@
           <th>Description</th>
           <th>Duration</th>
           <th>Capacity</th>
-          <th>Manage</th>
+          <th>Change</th>
+          <th>Delete</th>
         </tr>
       </thead>
       <tbody>
@@ -43,6 +49,7 @@
           <td th:text="${curso.description}"></td>
           <td th:text="${curso.duration}"></td>
           <td th:text="${list_student[i.index]} + ' / ' + ${curso.capacity}"></td>
+          <td><a th:href="@{/admin/course/editCourse/{id}(id=${curso.idc})}">Change</a></td>
           <td><a th:href="@{/admin/course/deleteCourse/{id}(id=${curso.idc})}">Delete</a></td>
         </tr>
       </tbody>

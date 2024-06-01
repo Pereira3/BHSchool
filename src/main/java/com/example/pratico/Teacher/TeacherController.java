@@ -4,12 +4,15 @@ import com.example.pratico.Course.Course;
 import com.example.pratico.Course.CourseRepository;
 import com.example.pratico.Student.Student;
 import com.example.pratico.Student.StudentRepository;
+import com.google.common.hash.Hashing;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +45,7 @@ public class TeacherController {
     public String teachers(Model model, HttpSession session) {
 
         Teacher t = teacherRepository.findTeacherByEmail((String) session.getAttribute("loggedUser"));
+        model.addAttribute("teacher", t); //Para permitir usar o IDT na alteração do perfil
 
         int idc = getSessionCourseID(session);
         Course c = courseRepository.findCourseByIdc(idc);
@@ -77,18 +81,46 @@ public class TeacherController {
         return "Teacher/teacher";
     }
 
+    // ---------- ALTERAR DADOS ----------
+    @GetMapping("/teacher/changeT/{idt}")
+    public String eProfile(@PathVariable(value = "idt") Integer idt, Model model) {
+        Teacher t = teacherRepository.findTeacherByIdt(idt);
+        model.addAttribute("teacher", t);
+        return "/Teacher/eProfile";
+    }
+    @PostMapping("/teacher/changeT/eProfile/{idt}")
+    public String saveEProfile(@PathVariable(value = "idt") Integer idt, @ModelAttribute Teacher teacher) {
+
+        Teacher t = teacherRepository.findTeacherByIdt(idt);
+        // Transformar pass em hash sha256
+        String sha256hex = Hashing.sha256().hashString(teacher.getPassword(), StandardCharsets.UTF_8).toString();
+
+        t.setPassword(sha256hex);
+        t.setAddress(teacher.getAddress());
+        teacherRepository.save(t);
+        return "redirect:/teacher";
+    }
+
 
     // ---------- STUDENTS ----------
     @GetMapping("/teacher/student")
     public String tStudenst(Model model, HttpSession session){
         int idc = getSessionCourseID(session);
         model.addAttribute("list_student", studentRepository.findStudentsByIdc(idc));
+
+        Teacher t = teacherRepository.findTeacherByEmail((String) session.getAttribute("loggedUser"));
+        model.addAttribute("teacher", t); //Para permitir usar o IDT na alteração do perfil
+
         return "/Teacher/student";
     }
     @GetMapping("/teacher/student/in")
     public String tStudentsIn(Model model, HttpSession session){
         int idc = getSessionCourseID(session);
         model.addAttribute("list_student_in", studentRepository.findStudentsByIdcAndState(idc, 1));
+
+        Teacher t = teacherRepository.findTeacherByEmail((String) session.getAttribute("loggedUser"));
+        model.addAttribute("teacher", t); //Para permitir usar o IDT na alteração do perfil
+
         return "/Teacher/in";
     }
     @GetMapping("/teacher/student/out")
@@ -96,13 +128,20 @@ public class TeacherController {
         int idc = getSessionCourseID(session);
         model.addAttribute("list_student_exit", studentRepository.findStudentsByIdcAndState(idc, 0));
         model.addAttribute("list_student_fin", studentRepository.findStudentsByIdcAndState(idc, 2));
+
+        Teacher t = teacherRepository.findTeacherByEmail((String) session.getAttribute("loggedUser"));
+        model.addAttribute("teacher", t); //Para permitir usar o IDT na alteração do perfil
+
         return "/Teacher/out";
     }
 
     @GetMapping("/teacher/student/in/cAverage/{ids}")
-    public String cAStudent(@PathVariable(value = "ids") Integer ids, Model model) {
+    public String cAStudent(@PathVariable(value = "ids") Integer ids, Model model, HttpSession session) {
         Student s = studentRepository.findStudentByIds(ids);
         model.addAttribute("student", s);
+
+        Teacher t = teacherRepository.findTeacherByEmail((String) session.getAttribute("loggedUser"));
+        model.addAttribute("teacher", t); //Para permitir usar o IDT na alteração do perfil
         return "/Teacher/inAverage";
     }
     @PostMapping("/teacher/student/in/saveAverage/{ids}")

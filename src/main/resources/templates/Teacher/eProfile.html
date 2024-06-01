@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teacher - Edit Teacher</title>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<nav role="navigation" class="primary-navigation">
+    <ul>
+        <li><a th:href="@{/teacher}">Home</a></li>
+        <li><a href="#">Students&dtrif;</a>
+            <ul class="dropdown">
+                <li><a th:href="@{/teacher/student}">All</a></li>
+                <li><a th:href="@{/teacher/student/in}">In Course</a></li>
+                <li><a th:href="@{/teacher/student/out}">Finalized/Abandoned</a></li>
+            </ul>
+        </li>
+        <li><a th:href="@{/teacher/changeT/{id}(id=${teacher.idt})}">Edit Profile</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="add_form">
+
+    <h1>Edit Profile</h1>
+
+    <form th:action="@{/teacher/changeT/eProfile/{id}(id=${teacher.idt})}" method="POST">
+        <input id="name" type="hidden" autocomplete="off" required th:field="*{teacher.name}" placeholder="Name">
+        <label for="password">Password:</label>
+        <input id="password" type="password" autocomplete="off" required th:field="*{teacher.password}" placeholder="Password">
+        <input id="email" type="hidden" autocomplete="off" required th:field="*{teacher.email}" placeholder="Email">
+        <label for="address">Address:</label>
+        <input id="address" type="text" autocomplete="off" required th:field="*{teacher.address}" placeholder="Address">
+        <input id="gender" type="hidden" autocomplete="off" required th:field="*{teacher.gender}" placeholder="Gender">
+        <input id="birthdate" type="hidden" autocomplete="off" required th:field="*{teacher.birthdate}" placeholder="Birthdate">
+        <input id="idc" type="hidden" min="1" autocomplete="off" required th:field="*{teacher.idc}" placeholder="Course ID">
+        <input id="salary" type="hidden" min="10" max="25" value="10" autocomplete="off" required th:field="*{teacher.salary}" placeholder="Salary">
+        <button type="submit">Submit Changes</button>
+    </form>
+</div>
+</body>
+</html>

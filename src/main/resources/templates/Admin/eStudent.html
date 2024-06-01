@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin - Edit Student</title>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+</head>
+
+<body>
+<nav role="navigation" class="primary-navigation">
+    <ul>
+        <li><a th:href="@{/admin}">Home</a></li>
+        <li><a href="#">Tables&dtrif;</a>
+            <ul class="dropdown">
+                <li><a th:href="@{/admin/course}">Courses</a></li>
+                <li><a th:href="@{/admin/student}">Students</a></li>
+                <li><a th:href="@{/admin/teacher}">Teachers</a></li>
+            </ul>
+        </li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</nav>
+
+<div class="add_form">
+    <h1>Edit Student</h1>
+
+    <div th:if:text="${error_eS}" style="color: red;">
+        <p th:text="${error_eS}"></p>
+    </div>
+
+    <form th:action="@{/admin/student/saveEditedStudent/{id}(id=${student.ids})}" method="POST">
+        <label for="name">Name:</label>
+        <input id="name" type="text" autocomplete="off" required th:field="*{student.name}" placeholder="Name">
+        <label for="password">Password:</label>
+        <input id="password" type="password" autocomplete="off" required th:field="*{student.password}" placeholder="Password">
+        <label for="email">Email:</label>
+        <input id="email" type="email" autocomplete="off" required th:field="*{student.email}" placeholder="Email">
+        <label for="address">Address:</label>
+        <input id="address" type="text" autocomplete="off" required th:field="*{student.address}" placeholder="Address">
+        <label for="gender">Gender:</label>
+        <input id="gender" type="text" autocomplete="off" required th:field="*{student.gender}" placeholder="Gender">
+        <label for="birthdate">Birthdate:</label>
+        <input id="birthdate" name="birthdate" type="date" autocomplete="off" required th:field="*{student.birthdate}" placeholder="Birthdate">
+        <label for="idc">Course ID:</label>
+        <input id="idc" type="number" min="1" max="10" autocomplete="off" required th:field="*{student.idc}" placeholder="Course ID">
+        <label for="average">Average:</label>
+        <input type="number" id="average" min="0.0" max="20.0" step="0.1" autocomplete="off" required th:field="*{student.average}" placeholder="Average">
+        <input type="hidden" id="state" name="state" th:value="${student.state}">
+        <button type="submit">Submit Changes</button>
+    </form>
+</div>
+</body>
+
+<script> // Tem q ser posto depois o body se não o getElementById é nulo
+var a_input = document.getElementById("average");
+
+document.getElementById("state").defaultValue = 1;
+
+a_input.addEventListener("input", function () {
+    // Se a média for inferior a 9,5 o state é obrigatóriamente 0
+    if (parseFloat(a_input.value) < 9.5 && parseFloat(a_input.value) > 0.0) {
+        document.getElementById("state").value = 0;
+    } else if (parseFloat(a_input.value) >= 9.5) {
+        document.getElementById("state").value = 2;
+    } else if (parseFloat(a_input.value) === 0.0) { // EM CURSO
+        document.getElementById("state").value = 1;
+    }
+});
+</script>
+
+</html>

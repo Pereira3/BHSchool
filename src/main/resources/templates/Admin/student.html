@@ -34,10 +34,12 @@
                     <th>Email</th>
                     <th>Birthdate</th>
                     <th>Address</th>
+                    <th>Gender</th>
                     <th>Course</th>
                     <th>Average</th>
                     <th>State</th>
-                    <th>Manage</th>
+                    <th>Change</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,9 +49,11 @@
                     <td th:text="${aluno.email}"></td>
                     <td th:text="${#dates.format(aluno.birthdate, 'dd/MM/yyyy')}" ></td>
                     <td th:text="${aluno.address}"></td>
+                    <td th:text="${aluno.gender}"></td>
                     <td th:text="${aluno.idc}"></td>
                     <td th:text="${aluno.average}"></td>
                     <td th:text="${aluno.state}"></td>
+                    <td><a th:href="@{/admin/student/editStudent/{id}(id=${aluno.ids})}">Change</a></td>
                     <td><a th:href="@{/admin/student/deleteStudent/{id}(id=${aluno.ids})}">Delete</a></td>
                 </tr>
             </tbody>
