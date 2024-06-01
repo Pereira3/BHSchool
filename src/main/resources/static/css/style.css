@@ -236,3 +236,79 @@ tbody tr:last-of-type {
 .add_form button:hover {
     background-color: #56a4e0;
 }
+
+#headerStudent{
+    margin-top: 80px;
+}
+
+.genderChart {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    width: 315px;
+    height: 315px;
+}
+
+.stateChart {
+    position: absolute;
+    top: 40%;
+    left: 70%;
+    width: 315px;
+    height: 315px;
+}
+
+.averageGradeChart {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 315px;
+    height: 315px;
+}
+
+.ageChartTeacher {
+    position: absolute;
+    top: 40%;
+    left: 10%;
+    width: 315px;
+    height: 315px;
+}
+
+.averageGradeChartTeacher {
+    position: absolute;
+    top: 40%;
+    left: 70%;
+    width: 315px;
+    height: 315px;
+}
+
+.genderChartTeacher {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    width: 315px;
+    height: 315px;
+}
+
+#headerTeacher{
+    margin-top: 80px;
+}
+
+.averageByCourse{
+    position: absolute;
+    top: 40%;
+    left: 2%;
+    width: 700px;
+    height: 350px;
+}
+
+.ageAverageByCourse{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    width: 700px;
+    height: 350px;
+}
+
+#headerAdmin{
+    margin-top: 80px;
+}

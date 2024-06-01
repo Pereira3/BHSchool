@@ -22,7 +22,7 @@ public class Student{
     private String gender;
     private int idc;
     private float average;
-    private int state; //1 - em Curso || 2 - Finalizado || 3 - Desistiu
+    private int state; //0 - Chumbado/Desistiu, 1 - Em Curso, 2 - Concluído
 
     public int getIds() {
         return ids;
@@ -82,6 +82,23 @@ public class Student{
     }
     public void setState(int state) {
         this.state = state;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender){
+        this.gender = gender;
+    }
+
+    public int getAge(Date birthdate){
+        Date now = new Date();
+        int age = now.getYear() - birthdate.getYear();
+        if(now.getMonth() < birthdate.getMonth() || (now.getMonth() == birthdate.getMonth() && now.getDate() < birthdate.getDate())){
+            age--;
+        }
+        return age;
     }
 
     @Override

@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Controller
 public class TeacherController {
@@ -43,11 +46,34 @@ public class TeacherController {
         int idc = getSessionCourseID(session);
         Course c = courseRepository.findCourseByIdc(idc);
 
+        int maleCount = studentRepository.findStudentsByGenderAndIdc("Male", idc).size();
+        int femaleCount = studentRepository.findStudentsByGenderAndIdc("Female", idc).size();
+
+        List<Student> students = studentRepository.findStudentsByIdc(idc);
+        List<Integer> ages = new ArrayList<>();
+        for (Student s : students) {
+            int age = s.getAge(s.getBirthdate());
+
+            ages.add(age);
+        }
+
+        int avg05 = studentRepository.findStudentsByAverageBetweenAndIdc(0.01f,5f, idc).size();
+        int avg510 = studentRepository.findStudentsByAverageBetweenAndIdc(5.01f,10f, idc).size();
+        int avg1015 = studentRepository.findStudentsByAverageBetweenAndIdc(10.01f,15f, idc).size();
+        int avg1520 = studentRepository.findStudentsByAverageBetweenAndIdc(15.1f,20f, idc).size();
+
         if(c == null || t == null){
             return "redirect:/error";
         }
 
         model.addAttribute("course", c.getName());
+        model.addAttribute("maleCount", maleCount);
+        model.addAttribute("femaleCount", femaleCount);
+        model.addAttribute("ages", ages);
+        model.addAttribute("avg05", avg05);
+        model.addAttribute("avg510", avg510);
+        model.addAttribute("avg1015", avg1015);
+        model.addAttribute("avg1520", avg1520);
         return "Teacher/teacher";
     }
 

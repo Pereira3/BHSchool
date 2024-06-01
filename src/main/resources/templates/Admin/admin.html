@@ -6,6 +6,7 @@
         <meta charset="ISO-8859-1"/>
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </head>
 
     <body>
@@ -23,6 +24,107 @@
             </ul>
         </nav>
 
-        <h1>Stats</h1>
+        <h1 id="headerAdmin">Admin statistics</h1>
+
+        <div class="averageByCourse">
+            <canvas id="averageByCourse"></canvas>
+        </div>
+
+        <div class="ageAverageByCourse">
+            <canvas id="ageAverageByCourse"></canvas>
+        </div>
+
+        <script th:inline="javascript">
+
+            let avgGrades = /*[[${avgGrades}]]*/ [];
+            let courses = /*[[${list_course}]]*/ [];
+            let avgAges = /*[[${avgAges}]]*/ [];
+
+            document.addEventListener("DOMContentLoaded", function() {
+                let btx = document.getElementById('averageByCourse').getContext('2d');
+                let averageByCourse = new Chart(btx, {
+                    type: 'bar',
+                    data: {
+                        labels: courses.map(course => course.name),
+                        datasets: [{
+                            label: 'Average Grade',
+                            data: avgGrades,
+                            fill: false,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y', // This makes the bars horizontal
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                ticks: {
+                                    stepSize: 1
+                                },
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                            },
+                            tooltip: {
+                                enabled: true,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.raw;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+
+                let ctx = document.getElementById('ageAverageByCourse').getContext('2d');
+                let ageAverageByCourse = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: courses.map(course => course.name),
+                        datasets: [{
+                            label: 'Average Age',
+                            data: avgAges,
+                            fill: false,
+                            borderColor: 'rgba(54, 162, 235, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y', // This makes the bars horizontal
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            x: {
+                                ticks: {
+                                    stepSize: 1
+                                },
+                                beginAtZero: true
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                            },
+                            tooltip: {
+                                enabled: true,
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.dataset.label + ': ' + context.raw;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            });
+        </script>
     </body>
 </html>

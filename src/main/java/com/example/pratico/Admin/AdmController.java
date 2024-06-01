@@ -20,6 +20,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -37,11 +38,52 @@ public class AdmController {
 
     // ---------- PÁGINA INICIAL ----------
     @GetMapping("/admin")
-    public String admins(HttpSession session) {
+    public String admins(Model model, HttpSession session) {
         Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
         if(a == null){
             return "redirect:/error";
         }
+        List<Course> courses = courseRepository.findAll();
+
+        // média de notas dos alunos em cada curso
+        List<Double> avgGrades = new ArrayList<>();
+        int counter = 0;
+        for (Course course : courses) {
+            List<Student> students = studentRepository.findStudentsByIdc(course.getIdc());
+            double sum = 0;
+            for (Student student : students) {
+                if (student.getAverage() == 0) {
+                    counter++;
+                }
+                sum += student.getAverage();
+            }
+            if (students.size() - counter == 0) {
+                avgGrades.add(0.0);
+                counter = 0;
+                continue;
+            }
+            double avg = sum / (students.size() - counter);
+            avgGrades.add(Math.round(avg * 100.0) / 100.0);
+            counter = 0;
+        }
+
+        // media de idade dos alunos em cada curso
+        List<Double> avgAges = new ArrayList<>();
+        for (Course course : courses) {
+            List<Student> students = studentRepository.findStudentsByIdc(course.getIdc());
+            double sum = 0;
+            for (Student student : students) {
+                sum += student.getAge(student.getBirthdate());
+            }
+            double avg = sum / students.size();
+            avgAges.add(Math.round(avg * 100.0) / 100.0);
+        }
+
+
+        model.addAttribute("avgAges", avgAges);
+        model.addAttribute("list_course", courses);
+        model.addAttribute("avgGrades", avgGrades);
+
         return "Admin/admin";
     }
 
@@ -144,7 +186,15 @@ public class AdmController {
     // ---------- COURSE ----------
     @GetMapping("/admin/course")
     public String admCourse(Model model){
-        model.addAttribute("list_course", courseRepository.findAll());
+        List<Course> courses = courseRepository.findAll();
+        List<Integer> enrolledStudents = new ArrayList<>();
+        for (Course course : courses) {
+            int enrolledCount = studentRepository.findStudentsByIdc(course.getIdc()).size();
+            enrolledStudents.add(enrolledCount);
+        }
+
+        model.addAttribute("list_student", enrolledStudents);
+        model.addAttribute("list_course", courses);
         return "/Admin/course";
     }
     @GetMapping("/admin/course/addCourse")

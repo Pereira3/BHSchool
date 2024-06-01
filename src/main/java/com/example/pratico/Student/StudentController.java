@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import java.util.List;
 
 @Controller
 public class StudentController {
@@ -46,7 +47,34 @@ public class StudentController {
             return "redirect:/error";
         }
 
-        model.addAttribute("course", c.getName());
+        int maleCount = studentRepository.findStudentsByGenderAndIdc("Male", idc).size();
+        int femaleCount = studentRepository.findStudentsByGenderAndIdc("Female", idc).size();
+       // double averageGrade = studentRepository.findAverageGrade(); // Assuming you have a method for this
+        int totalStudents = (int) studentRepository.count();
+        int totalCourses = (int) courseRepository.count();
+
+        int avg05 = studentRepository.findStudentsByAverageBetweenAndIdc(0.01f,5f, idc).size();
+        int avg510 = studentRepository.findStudentsByAverageBetweenAndIdc(5.01f,10f, idc).size();
+        int avg1015 = studentRepository.findStudentsByAverageBetweenAndIdc(10.01f,15f, idc).size();
+        int avg1520 = studentRepository.findStudentsByAverageBetweenAndIdc(15.1f,20f, idc).size();
+
+        int inCourse = studentRepository.findStudentsByIdcAndState(idc,1).size();
+        int finished = studentRepository.findStudentsByIdcAndState(idc,2).size();
+        int quit = studentRepository.findStudentsByIdcAndState(idc,0).size();
+
+        model.addAttribute("maleCount", maleCount);
+        model.addAttribute("femaleCount", femaleCount);
+        //model.addAttribute("averageGrade", averageGrade);
+        model.addAttribute("totalStudents", totalStudents);
+        model.addAttribute("totalCourses", totalCourses);
+        model.addAttribute("inCourse", inCourse);
+        model.addAttribute("finished", finished);
+        model.addAttribute("quit", quit);
+        model.addAttribute("avg05", avg05);
+        model.addAttribute("avg510", avg510);
+        model.addAttribute("avg1015", avg1015);
+        model.addAttribute("avg1520", avg1520);
+
         return "Student/student";
     }
 

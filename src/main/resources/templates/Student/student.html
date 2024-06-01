@@ -1,21 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>Student's Page</title>
-        <meta charset="ISO-8859-1"/>
-        <link rel="stylesheet" type="text/css" href="/css/style.css" />
-        <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <nav role="navigation" class="primary-navigation">
-            <ul>
-                <li><a th:href="@{/student}">Home</a></li>
-                <li><a th:href="@{/student/class}">Class</a></li>
-                <li><a th:href="@{/logout}">Logout</a></li>
-            </ul>
-        </nav>
+<head>
+    <title>Student</title>
+    <meta charset="ISO-8859-1"/>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<nav role="navigation" class="primary-navigation">
+    <ul>
+        <li><a th:href="@{/student}">Home</a></li>
+        <li><a th:href="@{/student/class}">Class</a></li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+    </ul>
+</nav>
 
-        <h1>Stats</h1>
-        <p>Course: <span th:text="${course}"></span></p>
-    </body>
+<h1 id="headerStudent">Student Statistics</h1>
+
+<div class="genderChart">
+    <canvas id="genderChart"></canvas>
+</div>
+<div class="stateChart">
+    <canvas id="stateChart"></canvas>
+</div>
+<div class="averageGradeChart">
+    <canvas id="averageGradeChart"></canvas>
+</div>
+
+<script th:inline="javascript">
+    document.addEventListener("DOMContentLoaded", function() {
+        let maleCount = /*[[${maleCount}]]*/ 0;
+        let femaleCount = /*[[${femaleCount}]]*/ 0;
+
+        let inCourseCount = /*[[${inCourse}]]*/ 0;
+        let finishedCount = /*[[${finished}]]*/ 0;
+        let quitedCount = /*[[${quit}]]*/ 0;
+
+        let avg05 = /*[[${avg05}]]*/ 0;
+        let avg510 = /*[[${avg510}]]*/ 0;
+        let avg1015 = /*[[${avg1015}]]*/ 0;
+        let avg1520 = /*[[${avg1520}]]*/ 0;
+
+        let ctx = document.getElementById('genderChart').getContext('2d');
+        let genderChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Female', 'Male'],
+                datasets: [{
+                    label: 'Number of Students',
+                    data: [femaleCount, maleCount],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { //remove grid but keep labels
+                    legend: {
+                        display: true,
+                    }
+                }
+            }
+        });
+
+        let gtx = document.getElementById('stateChart').getContext('2d');
+        let stateChart = new Chart(gtx, {
+            type: 'pie',
+            data: {
+                labels: ['In course', 'Approved', 'Quited'],
+                datasets: [{
+                    label: 'Number of Students',
+                    data: [inCourseCount, finishedCount, quitedCount],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { //remove grid but keep labels
+                    legend: {
+                        display: true,
+                    }
+                }
+            }
+        });
+
+        let atx = document.getElementById('averageGradeChart').getContext('2d');
+        let averageGradeChart = new Chart(atx, {
+            type: 'bar',
+            data: {
+                labels: ['0-5', '5-10', '10-15', '15-20'],
+                datasets: [{
+                    label: 'Number of Students',
+                    data: [avg05, avg510, avg1015, avg1520],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        ticks: {
+                            stepSize: 1,
+                            beginAtZero: true
+                        }
+                    },
+                }
+            }
+        });
+    });
+</script>
+</body>
 </html>

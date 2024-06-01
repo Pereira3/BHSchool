@@ -18,6 +18,7 @@ public class Teacher{
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthdate;
     private String address;
+    private String gender;
     private int idc;
     private int salary;
 
@@ -74,12 +75,20 @@ public class Teacher{
         this.salary = salary;
     }
 
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender){
+        this.gender = gender;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Teacher teacher = (Teacher) o;
-        return idt == teacher.idt && idc == teacher.idc && salary == teacher.salary && Objects.equals(name, teacher.name) && Objects.equals(password, teacher.password) && Objects.equals(email, teacher.email) && Objects.equals(birthdate, teacher.birthdate) && Objects.equals(address, teacher.address);
+        return idt == teacher.idt && idc == teacher.idc && salary == teacher.salary && gender.equals(teacher.gender) && Objects.equals(name, teacher.name) && Objects.equals(password, teacher.password) && Objects.equals(email, teacher.email) && Objects.equals(birthdate, teacher.birthdate) && Objects.equals(address, teacher.address);
     }
 
     @Override
@@ -93,6 +102,7 @@ public class Teacher{
                 ", address='" + address + '\'' +
                 ", idc=" + idc +
                 ", salary=" + salary +
+                ", gender=" + gender +
                 '}';
     }
 }

@@ -2,6 +2,7 @@ package com.example.pratico.Course;
 import jakarta.persistence.*;
 import java.util.Objects;
 
+
 @Entity
 @Table(name = "course")
 public class Course {
@@ -12,6 +13,10 @@ public class Course {
     private String description;
     private int duration; // in hours
     private int capacity;
+
+    public int getIdc() {
+        return idc;
+    }
 
     public String getName() {
         return name;
@@ -25,6 +30,9 @@ public class Course {
     }
     public void setDescription(String description) {
         this.description = description;
+    }
+    public void setIdc(int idc) {
+        this.idc = idc;
     }
 
     public int getDuration() {
