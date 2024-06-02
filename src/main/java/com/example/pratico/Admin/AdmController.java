@@ -247,7 +247,7 @@ public class AdmController {
         Student s_existence = studentRepository.findStudentByEmail(student.getEmail());
         Admin a_existence = adminRepository.findAdminByEmail(student.getEmail());
 
-        if (t_existence != null || s_existence != null || a_existence != null) { //Há alguém com o mesmo email
+        if (t_existence != null || (s_existence != null && !(s_existence.getEmail().equals(s.getEmail()))) || a_existence != null) { //Há alguém com o mesmo email
             rAttributes.addFlashAttribute("error_eS", "Email already exists...");
             return "redirect:/admin/student/editStudent/{ids}";
         }
@@ -293,7 +293,7 @@ public class AdmController {
         Student s_existence = studentRepository.findStudentByEmail(teacher.getEmail());
         Admin a_existence = adminRepository.findAdminByEmail(teacher.getEmail());
 
-        if (t_existence != null || s_existence != null || a_existence != null) { //Há alguém com o mesmo email
+        if ((t_existence != null && !(t_existence.getEmail().equals(t.getEmail()))) || s_existence != null || a_existence != null) { //Há alguém com o mesmo email
             rAttributes.addFlashAttribute("error_eT", "Email already exists...");
             return "redirect:/admin/teacher/editTeacher/{idt}";
         }
