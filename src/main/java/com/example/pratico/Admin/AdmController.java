@@ -221,7 +221,7 @@ public class AdmController {
         List<Student> s_existence = studentRepository.findStudentsByIdc(idc);
 
         if (!t_existence.isEmpty() || !s_existence.isEmpty()) { //Caso haja professores ou Alunos no curso -> Eliminar primeiro eles
-            rAttributes.addFlashAttribute("error_dC", "Course On Going...");
+            rAttributes.addFlashAttribute("error_C", "Course On Going...");
             return "redirect:/admin/course";
         }
 
@@ -333,7 +333,7 @@ public class AdmController {
         Course c_existence = courseRepository.findCourseByName(c.getName());
 
         if (c_existence != null && !(c_existence.getName().equals(course.getName()))) { //Já há um curso com o mesmo nome
-            rAttributes.addFlashAttribute("error_eC", "Course already exists...");
+            rAttributes.addFlashAttribute("error_C", "Course already exists...");
             return "redirect:/admin/course/editCourse/{idc}";
         }
 
