@@ -87,18 +87,31 @@ public class AdmController {
 
     // ---------- TEACHERS ----------
     @GetMapping("/admin/teacher")
-    public String admTeachers(Model model){
+    public String admTeachers(Model model, HttpSession session){
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
         model.addAttribute("list_teacher", teacherRepository.findAll());
         return "/Admin/teacher";
     }
     @GetMapping("/admin/teacher/addTeacher")
-    public String aProfessor(Model model) {
+    public String aProfessor(Model model, HttpSession session) {
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
         Teacher t = new Teacher();
         model.addAttribute("new_teacher", t);
         return "/Admin/addTeacher";
     }
     @PostMapping("/admin/teacher/saveTeacher")
-    public String gProfessor (@ModelAttribute("new_teacher") Teacher t, RedirectAttributes rAttributes) {
+    public String gProfessor (@ModelAttribute("new_teacher") Teacher t, RedirectAttributes rAttributes, HttpSession session) {
+
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
 
         Teacher t_existence = teacherRepository.findTeacherByEmail(t.getEmail());
         Student s_existence = studentRepository.findStudentByEmail(t.getEmail());
@@ -127,7 +140,11 @@ public class AdmController {
         return "redirect:/admin/teacher";
     }
     @GetMapping("admin/teacher/deleteTeacher/{idt}")
-    public String eProfessor(@PathVariable(value = "idt") Integer idt) {
+    public String eProfessor(@PathVariable(value = "idt") Integer idt, HttpSession session) {
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
         teacherRepository.deleteById(idt);
         return "redirect:/admin/teacher";
     }
@@ -135,19 +152,32 @@ public class AdmController {
 
     // ---------- STUDENT ----------
     @GetMapping("/admin/student")
-    public String admStudent(Model model){
+    public String admStudent(Model model, HttpSession session){
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
         model.addAttribute("list_student", studentRepository.findAll());
         return "/Admin/student";
     }
 
     @GetMapping("/admin/student/addStudent")
-    public String aStudent(Model model) {
+    public String aStudent(Model model, HttpSession session) {
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
         Student s = new Student();
         model.addAttribute("new_student", s);
         return "/Admin/addStudent";
     }
     @PostMapping("/admin/student/saveStudent")
-    public String gStudent (@ModelAttribute("new_student") Student s, RedirectAttributes rAttributes) {
+    public String gStudent (@ModelAttribute("new_student") Student s, RedirectAttributes rAttributes, HttpSession session) {
+
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
 
         Teacher t_existence = teacherRepository.findTeacherByEmail(s.getEmail());
         Student s_existence = studentRepository.findStudentByEmail(s.getEmail());
@@ -175,7 +205,7 @@ public class AdmController {
         return "redirect:/admin/student";
     }
     @GetMapping("admin/student/deleteStudent/{ids}")
-    public String eStudent(@PathVariable(value = "ids") Integer ids) {
+    public String eStudent(@PathVariable(value = "ids") Integer ids, HttpSession session) {
         studentRepository.deleteById(ids);
         return "redirect:/admin/student";
     }
@@ -183,7 +213,11 @@ public class AdmController {
 
     // ---------- COURSE ----------
     @GetMapping("/admin/course")
-    public String admCourse(Model model){
+    public String admCourse(Model model, HttpSession session){
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
         List<Course> courses = courseRepository.findAll();
         List<Integer> enrolledStudents = new ArrayList<>();
         for (Course course : courses) {
@@ -196,13 +230,22 @@ public class AdmController {
         return "/Admin/course";
     }
     @GetMapping("/admin/course/addCourse")
-    public String aCourse(Model model) {
+    public String aCourse(Model model, HttpSession session) {
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
         Course c = new Course();
         model.addAttribute("new_course", c);
         return "/Admin/addCourse";
     }
     @PostMapping("/admin/course/saveCourse")
-    public String gCourse (@ModelAttribute("new_course") Course c, RedirectAttributes rAttributes) {
+    public String gCourse (@ModelAttribute("new_course") Course c, RedirectAttributes rAttributes, HttpSession session) {
+
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
 
         Course c_existence = courseRepository.findCourseByName(c.getName());
 
@@ -215,7 +258,12 @@ public class AdmController {
         return "redirect:/admin/course";
     }
     @GetMapping("admin/course/deleteCourse/{idc}")
-    public String eCourse(@PathVariable(value = "idc") Integer idc, RedirectAttributes rAttributes) {
+    public String eCourse(@PathVariable(value = "idc") Integer idc, RedirectAttributes rAttributes, HttpSession session) {
+
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
 
         List<Teacher> t_existence = teacherRepository.findTeachersByIdc(idc);
         List<Student> s_existence = studentRepository.findStudentsByIdc(idc);
@@ -231,13 +279,24 @@ public class AdmController {
 
     // ---------- ALTERAR DADOS ----------
     @GetMapping("/admin/student/editStudent/{ids}")
-    public String eStudent(@PathVariable(value = "ids") Integer ids, Model model) {
+    public String eStudent(@PathVariable(value = "ids") Integer ids, Model model, HttpSession session) {
+
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
+
         Student s = studentRepository.findStudentByIds(ids);
         model.addAttribute("student", s);
         return "/Admin/eStudent";
     }
     @PostMapping("/admin/student/saveEditedStudent/{ids}")
-    public String saveEStudent(@PathVariable(value = "ids") Integer ids, @ModelAttribute Student student, RedirectAttributes rAttributes) {
+    public String saveEStudent(@PathVariable(value = "ids") Integer ids, @ModelAttribute Student student, RedirectAttributes rAttributes, HttpSession session) {
+
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
 
         Student s = studentRepository.findStudentByIds(ids);
         // Transformar pass em hash sha256
@@ -277,13 +336,24 @@ public class AdmController {
 
     // ---------- ALTERAR DADOS ----------
     @GetMapping("/admin/teacher/editTeacher/{idt}")
-    public String eTeacher(@PathVariable(value = "idt") Integer idt, Model model) {
+    public String eTeacher(@PathVariable(value = "idt") Integer idt, Model model, HttpSession session) {
+
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
+
         Teacher t = teacherRepository.findTeacherByIdt(idt);
         model.addAttribute("teacher", t);
         return "/Admin/eTeacher";
     }
     @PostMapping("/admin/teacher/saveEditedTeacher/{idt}")
-    public String saveETeacher(@PathVariable(value = "idt") Integer idt, @ModelAttribute Teacher teacher, RedirectAttributes rAttributes) {
+    public String saveETeacher(@PathVariable(value = "idt") Integer idt, @ModelAttribute Teacher teacher, RedirectAttributes rAttributes, HttpSession session) {
+
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
 
         Teacher t = teacherRepository.findTeacherByIdt(idt);
         // Transformar pass em hash sha256
@@ -321,13 +391,23 @@ public class AdmController {
 
     // ---------- ALTERAR DADOS ----------
     @GetMapping("/admin/course/editCourse/{idc}")
-    public String eCourse(@PathVariable(value = "idc") Integer idc, Model model) {
+    public String eCourse(@PathVariable(value = "idc") Integer idc, Model model, HttpSession session) {
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
+
         Course c = courseRepository.findCourseByIdc(idc);
         model.addAttribute("curso", c);
         return "/Admin/eCourse";
     }
     @PostMapping("/admin/course/saveEditedCourse/{idc}")
-    public String saveECourse(@PathVariable(value = "idc") Integer idc, @ModelAttribute Course course, RedirectAttributes rAttributes) {
+    public String saveECourse(@PathVariable(value = "idc") Integer idc, @ModelAttribute Course course, RedirectAttributes rAttributes, HttpSession session) {
+
+        Admin a = adminRepository.findAdminByEmail((String) session.getAttribute("loggedUser"));
+        if(a == null){
+            return "redirect:/error";
+        }
 
         Course c = courseRepository.findCourseByIdc(idc);
         Course c_existence = courseRepository.findCourseByName(c.getName());

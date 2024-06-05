@@ -83,13 +83,23 @@ public class TeacherController {
 
     // ---------- ALTERAR DADOS ----------
     @GetMapping("/teacher/changeT/{idt}")
-    public String eProfile(@PathVariable(value = "idt") Integer idt, Model model) {
+    public String eProfile(@PathVariable(value = "idt") Integer idt, Model model, HttpSession session) {
+        Teacher tc = teacherRepository.findTeacherByEmail((String) session.getAttribute("loggedUser"));
+        if(tc == null){
+            return "error";
+        }
+
         Teacher t = teacherRepository.findTeacherByIdt(idt);
         model.addAttribute("teacher", t);
         return "/Teacher/eProfile";
     }
     @PostMapping("/teacher/changeT/eProfile/{idt}")
-    public String saveEProfile(@PathVariable(value = "idt") Integer idt, @ModelAttribute Teacher teacher) {
+    public String saveEProfile(@PathVariable(value = "idt") Integer idt, @ModelAttribute Teacher teacher, HttpSession session) {
+
+        Teacher tc = teacherRepository.findTeacherByEmail((String) session.getAttribute("loggedUser"));
+        if(tc == null){
+            return "error";
+        }
 
         Teacher t = teacherRepository.findTeacherByIdt(idt);
         // Transformar pass em hash sha256
@@ -145,7 +155,13 @@ public class TeacherController {
         return "/Teacher/inAverage";
     }
     @PostMapping("/teacher/student/in/saveAverage/{ids}")
-    public String saveAverage(@PathVariable(value = "ids") Integer ids, @RequestParam("average") Float average, @RequestParam("state") Integer state) {
+    public String saveAverage(@PathVariable(value = "ids") Integer ids, @RequestParam("average") Float average, @RequestParam("state") Integer state, HttpSession session) {
+
+        Teacher tc = teacherRepository.findTeacherByEmail((String) session.getAttribute("loggedUser"));
+        if(tc == null){
+            return "error";
+        }
+
         Student s = studentRepository.findStudentByIds(ids);
         s.setAverage(average);
         s.setState(state);

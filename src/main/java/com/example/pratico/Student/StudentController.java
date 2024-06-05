@@ -91,13 +91,22 @@ public class StudentController {
 
     // ---------- ALTERAR DADOS ----------
     @GetMapping("/student/changeS/{ids}")
-    public String eProfile(@PathVariable(value = "ids") Integer ids, Model model) {
+    public String eProfile(@PathVariable(value = "ids") Integer ids, Model model, HttpSession session) {
+        Student sc = studentRepository.findStudentByEmail((String) session.getAttribute("loggedUser"));
+        if(sc == null){
+            return "error";
+        }
         Student s = studentRepository.findStudentByIds(ids);
         model.addAttribute("student", s);
         return "/Student/eProfile";
     }
     @PostMapping("/student/changeS/eProfile/{ids}")
-    public String saveEProfile(@PathVariable(value = "ids") Integer ids, @ModelAttribute Student student) {
+    public String saveEProfile(@PathVariable(value = "ids") Integer ids, @ModelAttribute Student student, HttpSession session) {
+
+        Student sc = studentRepository.findStudentByEmail((String) session.getAttribute("loggedUser"));
+        if(sc == null){
+            return "error";
+        }
 
         Student s = studentRepository.findStudentByIds(ids);
         // Transformar pass em hash sha256
